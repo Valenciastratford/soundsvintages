@@ -1,0 +1,165 @@
+<html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Study Session</title>
+
+<style>
+  body {
+    margin: 0;
+    padding: 50px;
+    padding-left: 310px;
+    font-family: "Georgia", serif;
+    color: #806765;
+  }
+
+  .frame {
+    position: relative;
+    padding: 30px 50px 27px;
+    max-width: 700px;
+    border: 2px solid #2f2a24;
+    border-radius: 18px;
+
+    background-image: url("https://i.imgur.com/USMN2XN.jpeg");
+    background-size: cover;
+    background-position: center;
+  }
+
+  
+  .bg-title {
+    position: absolute;
+    top: 46px;
+    left: 49%;
+    transform: translateX(-50%);
+    font-size: 32px;
+    letter-spacing: 2px;
+    opacity: 90;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  /* Button rows */
+  .row {
+    display: flex;
+    justify-content: center;
+    gap: 35px;
+    margin-bottom: -70px;
+    
+    margin-top: 90px;
+  }
+
+  .row.second {
+    gap: 29px;
+    margin-bottom: 2px;
+  }
+
+  button {
+    min-width: 60px;
+    padding: 15px 18px;
+    border-radius: 14px;
+    border: 1.5px solid #2f2a24;
+    background: rgba(128, 98, 96, 1); /* blue = sound buttons */
+    font-size: 12px;
+    cursor: pointer;
+    font-family: "Georgia", serif;
+  }
+
+  button:hover {
+    background: rgba(156, 130, 128, 1);
+  }
+
+ .slider {
+    margin-top: 30px;
+    padding-left: 115px;
+  }
+
+  input[type="range"] {
+    width: 80%;
+    accent-color: #cc8872;
+  }
+
+  .stop {
+    background: rgba(216, 160, 160, 0.9);
+    min-width: 90px;
+    padding: 10px 12px;
+    display: block;
+    font-size: 12px;
+    
+    margin: 18px auto 0;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="frame">
+
+  <!-- Background title -->
+  <div class="bg-title">Study Session</div>
+
+  <!-- Top row (3 blue buttons) -->
+  <div class="row">
+    <button onclick="playSound(rain)">Rain</button>
+    <button onclick="playSound(fire)">Fireplace</button>
+    <button onclick="playSound(coffee)">Coffee</button>
+  </div>
+
+  <!-- Second row (2 blue buttons) -->
+  <div class="row second">
+    <button onclick="playSound(oldmusic)">Old Music</button>
+    <button onclick="playSound(whitenoise)">White Noise</button>
+  </div>
+
+  <!-- Green slider -->
+  <div class="slider">
+    <input type="range" min="0" max="1" step="0.01" value="0.5"
+           oninput="setVolume(this.value)">
+  </div>
+  
+  <button class="stop" onclick="stopAll()">Stop</button>
+  
+</div>
+
+<!-- AUDIO FILES -->
+<audio id="rain" loop>
+  <source src="https://www.orangefreesounds.com/wp-content/uploads/2018/04/Gentle-rain-loop.mp3">
+</audio>
+
+<audio id="fire" loop>
+  <source src="https://orangefreesounds.com/wp-content/uploads/2025/04/Realistic-fireplace-sound-effect.mp3">
+</audio>
+
+<audio id="coffee" loop>
+  <source src="https://orangefreesounds.com/wp-content/uploads/2022/05/Pouring-coffee-sound-effect.mp3">
+</audio>
+
+<audio id="oldmusic" loop>
+  <source src="https://oldmusic.edgeone.app/Passacaglia-for-violin-and-viola.mp3"> 
+</audio>
+
+<audio id="whitenoise" loop>
+  <source src="https://www.orangefreesounds.com/wp-content/uploads/2017/03/Relaxing-white-noise.mp3">
+</audio>
+
+<script>
+  const sounds = document.querySelectorAll("audio");
+
+  function playSound(sound) {
+    stopAll();
+    sound.play();
+  }
+
+  function stopAll() {
+    sounds.forEach(s => {
+      s.pause();
+      s.currentTime = 0;
+    });
+  }
+
+  function setVolume(v) {
+    sounds.forEach(s => s.volume = v);
+  }
+</script>
+
+</body>
+</html>
